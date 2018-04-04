@@ -30,13 +30,16 @@ class NewPost extends Component {
                };
 
       }
+
     onTitleChange(e) {
         this.setState({ title: e.target.value });
     }
+
     onContentChange(e) {
         this.setState({ description: e.target.value });
         return e.target.value = '';
     }
+
     onImagesURLChange(e) {
         this.setState({ image: e.target.value });
         return e.target.value = '';
@@ -50,11 +53,11 @@ class NewPost extends Component {
             imageValid: ''
         };
 
-        if (this.state.title === '') {
+        if (this.state.title.trim() === '') {
             isError = true;
             errors.titleValid = "must be at least one letter";
         }
-        if (this.state.description === '') {
+        if (this.state.description.trim() === '') {
             isError = true;
             errors.descriptionValid = "must be at least one letter";
         }
@@ -75,11 +78,11 @@ class NewPost extends Component {
         const err = this.validate();
         if (!err) {
           this.props.addPost(this.state);
+          this.props.history.push('/posts');
         }
     };
 
     render() {
-
         return (
             <div style={this.styles.createPost}>
                 <div >
@@ -104,10 +107,7 @@ class NewPost extends Component {
                     errorText={this.state.imageValid}
                 /><br />
                     <br />
-                    <NavLink to="/post/1">
-                        <RaisedButton label="Submit" onClick={e => this.onSubmit(e)} primary
-                        />
-                    </NavLink>
+                    <RaisedButton label="Submit" onClick={e => this.onSubmit(e)} primary/>
                 </div>
             </div>
         );
@@ -116,7 +116,6 @@ class NewPost extends Component {
 
 export default withRouter(connect(
     () => ({
-
     }),
     dispatch => bindActionCreators({
        addPost

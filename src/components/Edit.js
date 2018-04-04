@@ -9,9 +9,11 @@ import { dellPost, changePost } from '../actions';
 import { withRouter ,NavLink } from 'react-router-dom';
 import { TextField } from 'material-ui';
 
+
 const selectPostById = ( id, posts ) => {
     return posts.find(post => post.id === id);
 };
+
 class Edit extends Component {
     constructor(props) {
         super(props);
@@ -43,32 +45,38 @@ class Edit extends Component {
                 flexWrap: 'wrap',
             },
             medium: {
-                width: 750,
+                width: "70%",
                 height: 40,
                 margin: 12,
             }
         };
 
     }
+
     dellPost = id => {
         this.props.dellPost(id)
     };
+
     timeCreate = time =>{
         let now = moment(time);
         let createPostDate = now.format('dddd, MMMM DD YYYY, h:mm:ss');
         return createPostDate;
     };
+
     onTitleChange(e) {
         this.setState({ title: e.target.value });
     }
+
     onContentChange(e) {
         this.setState({ description: e.target.value });
         return e.target.value = '';
     }
+
     onImagesURLChange(e) {
         this.setState({ image: e.target.value });
         return e.target.value = '';
     }
+
     validate = () => {
         let isError = false;
         const errors = {
@@ -76,11 +84,11 @@ class Edit extends Component {
             descriptionValid: '',
             imageValid: ''
         };
-        if (this.state.title === '') {
+        if (this.state.title.trim() === '') {
             isError = true;
             errors.titleValid = "must be at least one letter";
         }
-        if (this.state.description === '') {
+        if (this.state.description.trim() === '') {
             isError = true;
             errors.descriptionValid = "must be at least one letter";
         }
@@ -100,10 +108,9 @@ class Edit extends Component {
         if (!err) {
             const { post } = this.props;
             this.props.changePost(post.id,this.state.title, this.state.description, this.state.image);
+            this.props.history.push('/posts');
         }
-
     };
-
 
     render(){
         const { post } = this.props;
@@ -118,16 +125,15 @@ class Edit extends Component {
                     <span style={this.styles.input}>
                         <TextField
                             style={this.styles.medium}
-                            placeholder = { post.title }
+                            placeholder = {post.title}
                             onChange={this.onTitleChange}
                             value={this.state.title}
                             errorText={this.state.titleValid}
                         /><br />
                         <TextField
                             style={this.styles.medium}
-                            placeholder = { post.description }
+                            placeholder = {post.description}
                             multiLine
-                            rows={5}
                             onChange={this.onContentChange}
                             value={this.state.description}
                             errorText={this.state.descriptionValid}
@@ -136,7 +142,7 @@ class Edit extends Component {
                             style={this.styles.medium}
                             onChange={this.onImagesURLChange}
                             value={this.state.image}
-                            placeholder = { post.image }
+                            placeholder = {post.image}
                             errorText={this.state.imageValid}
                         /><br />
                     </span>
@@ -162,10 +168,10 @@ class Edit extends Component {
 }
 
 export default withRouter(connect(
-    ({reducerPost }, extraProps) => {
+    ({ reducerHelper }, extraProps) => {
         const {id} = extraProps.match.params;
         return {
-            post: selectPostById(Number(id), reducerPost.posts)
+            post: selectPostById(Number(id),  reducerHelper.posts)
         }
     },
     dispatch => bindActionCreators({

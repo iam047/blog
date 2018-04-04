@@ -6,14 +6,14 @@ import PostList from './PostList';
 import BlogPreview from './BlogPreview';
 import Post from './Post';
 import Edit from './Edit';
+import Authentication from "./Authentication";
 
 export default class App extends Component {
     constructor(){
-        super()
+        super();
     }
 
     render(){
-
         return(
              <div>
                  <Router >
@@ -25,6 +25,7 @@ export default class App extends Component {
                              <Route  path="/posts" component={PostList} />
                              <Route exact path="/post/:id" component={Post} />
                              <Route exact path="/post/:id/edit" component={Edit} />
+                             <Route exact path="/authentication" component={Authentication} />
                          </Switch>
                      </div>
                  </Router>

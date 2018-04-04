@@ -11,6 +11,7 @@ import moment from 'moment';
 import { withRouter ,NavLink } from 'react-router-dom';
 
 
+
 class PostList extends Component {
     constructor(){
         super();
@@ -88,8 +89,8 @@ class PostList extends Component {
 }
 
 export default withRouter(connect(
-    ({reducerPost }) => ({
-        posts : reducerPost .posts
+    ({ reducerHelper }) => ({
+        posts :  reducerHelper .posts
     }),
     dispatch => bindActionCreators({
         dellPost

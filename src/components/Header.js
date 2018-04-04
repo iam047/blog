@@ -35,7 +35,10 @@ export default class Header extends Component {
                         <RaisedButton label="Menu" style={this.styles.medium}/>
                     </NavLink>
                     <span >
-                        <RaisedButton label="Login" style={this.styles.medium}/>
+                        <NavLink to="/authentication">
+                        <RaisedButton label="Authentication" style={this.styles.medium}
+                        />
+                        </NavLink>
                         <NavLink to="/posts">
                             <RaisedButton label="Posts" style={this.styles.medium}/>
                         </NavLink>

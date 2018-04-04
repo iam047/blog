@@ -9,6 +9,7 @@ import { dellPost } from '../actions';
 import {  withRouter,NavLink } from 'react-router-dom';
 
 
+
 const selectPostById = ( id, posts ) => {
     return posts.find(post => post.id === id);
 };
@@ -85,10 +86,10 @@ class Post extends Component {
     }
 }
 export default withRouter(connect(
-    ({reducerPost }, extraProps) => {
+    ({ reducerHelper }, extraProps) => {
         const {id} = extraProps.match.params;
         return {
-            post: selectPostById( Number(id), reducerPost.posts )
+            post: selectPostById( Number(id),  reducerHelper.posts )
         }
     },
     dispatch => bindActionCreators({
