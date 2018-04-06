@@ -3,7 +3,7 @@ export const initialState = {
         id: 1,
         user: "Alex",
         userAvatar : "http://www.imagesyoulike.com/images/h/32x24/h0466.jpg",
-        title: "My Post",
+        title: "Post My asd",
         description: "A document is a written, drawn, presented, or memorialized representation of thought.",
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeIdYh8P61DSTlijYR8hD9OGk4JrSpZU99cN3xFKpH_f_bNAOs',
         createdAt: Date.now(),
@@ -19,5 +19,6 @@ export const initialState = {
             createdAt: Date.now(),
             updatedAt: '',
         }
-    ]
+    ],
+    searchValue:'',
 };

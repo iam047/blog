@@ -14,7 +14,7 @@ const logger = createLogger({
    predicate: true,
 });
 
-let store = createStore(reducers, applyMiddleware(thunk,logger));
+const store = createStore(reducers, applyMiddleware(thunk,logger));
 
 ReactDOM.render(
     <MuiThemeProvider>

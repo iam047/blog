@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { dellPost } from "../actions";
-import {Card, CardMedia,CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import {  deletePost, valueSearch, sortDate } from "../actions";
+import {Card} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
 import {grey50} from 'material-ui/styles/colors';
-import moment from 'moment';
+import PostHeader from "../containers/PostHeader";
 import { withRouter ,NavLink } from 'react-router-dom';
-
-
+import { TextField, RaisedButton } from 'material-ui';
 
 class PostList extends Component {
     constructor(){
@@ -27,60 +26,79 @@ class PostList extends Component {
             buttonDEll: {
                 justifyContent:'flex-end'
             },
+            menu: {
+                display: 'flex',
+                justifyContent: 'center',
+            },
+            input: {
+                width: 200,
+                height: 60,
+
+            },
+            sort: {
+                width: 100,
+                height: 30,
+                margin: 25,
+            },
         };
     }
 
-     dellPost = id => {
-       this.props.dellPost(id)
-     };
 
-     timeCreate = time => {
-         let now = moment(time);
-         let createPostDate = now.format('dddd, MMMM DD YYYY, h:mm:ss');
-         return createPostDate;
+    deletePost = id => {
+       this.props.deletePost(id)
      };
-
-     defaultUser = (user = 'user' ) => {
-        return user;
-     };
-
-     defaultUserAvatar = (avatar='http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg') => {
-        return avatar;
-     };
+    search = e => {
+        this.props.valueSearch(e.target.value);
+    };
+    sortDate = () =>{
+        this.props.sortDate();
+    };
 
      render() {
-        const { posts } = this.props;
+        const { posts, searchValue } = this.props;
+        const filterSearch = posts.filter(({title}) => {
+            return title.toLowerCase().includes(searchValue);
+        });
         return (
             <div >
-                {posts.map(post => (
-                    <List style={this.styles.root}  key={post.id} >
-                        <Card style={this.styles.postSize} >
-                            <Chip onRequestDelete={() => this.dellPost(post.id)}
-                                  onClick={()=> this.dellPost(post.id)}
-                                  backgroundColor={grey50}
-                                  style={this.styles.buttonDEll}>
-                            </Chip>
-                            <NavLink to={`/post/${post.id}`}>
-                                <CardHeader
-                                    title={this.defaultUser(post.user)}
-                                    subtitle={this.timeCreate(post.createdAt )}
-                                    avatar={this.defaultUserAvatar(post.userAvatar)}
-                                    actAsExpander={true}
-                                    showExpandableButton={true}
-                                />
-                                <CardTitle title={post.title} />
-                                <CardMedia>
-                                    <img  src={post.image}/>
-                                </CardMedia>
-                                <CardText expandable={true}>
-                                    {post.description}
-                                    </CardText>
-                            </NavLink>
-                            <NavLink to={`/post/${post.id}/edit`}>
-                                <FlatButton label="Edit" />
-                            </NavLink>
-                        </Card>
-                    </List>
+                <div style={{backgroundColor: "#f2f2f2"}}>
+                <div style={this.styles.menu} >
+                    <RaisedButton
+                        label="sort"
+                        style={this.styles.sort}
+                        onClick={()=> this.sortDate()}
+                    />
+                    <TextField
+                        style={this.styles.input}
+                        floatingLabelText="Search post"
+                        onChange={(e)=> this.search(e)}
+                    />
+                </div>
+                </div>
+                {filterSearch.map(({user='user',
+                             userAvatar='http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg',
+                             id,createdAt,title,image,description}) => (
+                <List style={this.styles.root}  key={id} >
+                    <Card style={this.styles.postSize} >
+                        <Chip onRequestDelete={() => this. deletePost(id)}
+                              onClick={()=> this. deletePost(id)}
+                              backgroundColor={grey50}
+                              style={this.styles.buttonDEll}>
+                        </Chip>
+                        <NavLink to={`/post/${id}`}>
+                            <PostHeader title={title}
+                                       image={image}
+                                       createdAt={createdAt}
+                                       description={description}
+                                       user={user}
+                                       userAvatar={userAvatar}
+                            />
+                        </NavLink>
+                        <NavLink to={`/post/${id}/edit`}>
+                            <FlatButton label="Edit" />
+                        </NavLink>
+                    </Card>
+                </List>
                 ))
                 }
             </div>
@@ -90,10 +108,14 @@ class PostList extends Component {
 
 export default withRouter(connect(
     ({ reducerHelper }) => ({
-        posts :  reducerHelper .posts
+        posts :  reducerHelper.posts,
+        searchValue: reducerHelper.searchValue,
+
     }),
     dispatch => bindActionCreators({
-        dellPost
+        deletePost,
+        valueSearch,
+        sortDate
     }, dispatch)
 )(PostList));
 

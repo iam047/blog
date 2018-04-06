@@ -1,7 +1,6 @@
-import { ADD_POST, DELL_POST,CHANGE_POST } from '../constants';
+import { ADD_POST, DELETE_POST,CHANGE_POST,VALUE_SEARCH, SORT_DATE } from '../constants';
 import { reducerHelper } from './reducerHelper';
 import { initialState } from './initialState';
-
 
 export default reducerHelper(initialState, {
     [ADD_POST] : (state, action) => ({
@@ -15,24 +14,34 @@ export default reducerHelper(initialState, {
                 image: action.image,
                 createdAt: Date.now(),
                 updatedAt: '',
-
             },
-        ]
+        ],
+        searchValue:'',
     }),
-    [DELL_POST] : (state, action) => ({
+    [DELETE_POST] : (state, action) => ({
         ...state, posts: [...state.posts.filter(post =>
             post.id !== action.id
         )]
     }),
     [CHANGE_POST] : (state, action) => ({
         ...state, posts: [...state.posts.map(post => post.id === action.id
-            ? {...post, title: action.title,
+            ? {...post,
+                title: action.title,
                 description: action.description,
                 image: action.image,
-                createdAt: Date.now() } : post)]
-    })
-
-
+                createdAt: Date.now()
+            } : post
+        )]
+    }),
+    [VALUE_SEARCH] : (state, action) => ({
+            ...state, posts: [...state.posts], searchValue: action.value
+    }),
+    [SORT_DATE] : (state) => ({
+        ...state,   posts: [...state.posts.sort(post => {
+                return post.createdAt
+            }
+        )]
+    }),
 
 })
 

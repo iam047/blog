@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import moment from "moment/moment";
-import { dellPost } from '../actions';
+import {  deletePost } from '../actions';
 import {  withRouter,NavLink } from 'react-router-dom';
-
-
+import PostHeader from "../containers/PostHeader";
 
 const selectPostById = ( id, posts ) => {
     return posts.find(post => post.id === id);
@@ -32,51 +30,34 @@ class Post extends Component {
         };
     }
 
-    dellPost = id => {
-        this.props.dellPost(id)
+    deletePost = id => {
+        this.props.deletePost(id)
     };
-
-    timeCreate = time => {
-        let now = moment(time);
-        let createPostDate = now.format('dddd, MMMM DD YYYY, h:mm:ss');
-        return createPostDate;
-    };
-
-    defaultUser = (user = 'user' ) => {
-        return user;
-    };
-
-    defaultUserAvatar = (avatar='http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg') => {
-        return avatar;
-    } ;
 
     render(){
-        const { post } = this.props;
+        const { post:{user='user',
+            userAvatar='http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg',
+            title, image, createdAt, description, id} } = this.props;
         return (
             <List style={this.styles.root}  >
                 <Card style={this.styles.postSize}>
-                    <CardHeader
-                        title={this.defaultUser(post.user)}
-                        subtitle={this.timeCreate(post.createdAt )}
-                        avatar={this.defaultUserAvatar(post.userAvatar)}
+                    <PostHeader title={title}
+                                 image={image}
+                                 createdAt={createdAt}
+                                 description={description}
+                                 user={user}
+                                 userAvatar={userAvatar}
                     />
-                    <CardTitle title={post.title} />
-                    <CardMedia>
-                        <img  src={post.image}/>
-                    </CardMedia>
-                    <CardText >
-                        {post.description}
-                        </CardText>
                     <CardActions>
                         <NavLink to="/posts">
                             <FlatButton label="Back to posts" />
                         </NavLink>
-                        <NavLink to={`/post/${post.id}/edit`}>
+                        <NavLink to={`/post/${id}/edit`}>
                             <FlatButton label="Edit" />
                         </NavLink>
                         <NavLink to="/posts">
                             <FlatButton label="Dell post"
-                                        onClick={()=> this.dellPost(post.id)}
+                                        onClick={()=> this.deletePost(id)}
                             />
                         </NavLink>
                     </CardActions>
@@ -93,7 +74,7 @@ export default withRouter(connect(
         }
     },
     dispatch => bindActionCreators({
-        dellPost
+        deletePost
     }, dispatch)
 )(Post));
 

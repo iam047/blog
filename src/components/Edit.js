@@ -5,7 +5,7 @@ import {Card, CardActions, CardHeader} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import moment from "moment/moment";
-import { dellPost, changePost } from '../actions';
+import {  deletePost, changePost } from '../actions';
 import { withRouter ,NavLink } from 'react-router-dom';
 import { TextField } from 'material-ui';
 
@@ -15,46 +15,43 @@ const selectPostById = ( id, posts ) => {
 };
 
 class Edit extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            title: '',
-            description: '',
-            image: '',
-            titleValid: '',
-            descriptionValid: '',
-            imageValid: '',
-        };
-        this.onTitleChange = this.onTitleChange.bind(this);
-        this.onContentChange = this.onContentChange.bind(this);
-        this.onImagesURLChange = this.onImagesURLChange.bind(this);
-        this.styles = {
-            root: {
-                display: 'flex',
-                justifyContent: 'center',
-                flexWrap: 'wrap',
-            },
-            postSize:{
-                width: '68%',
-            },
-            input: {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-            },
-            medium: {
-                width: "70%",
-                height: 40,
-                margin: 12,
-            }
-        };
+constructor(props) {
+    super(props);
+    this.state = {
+        title: '',
+        description: '',
+        image: '',
+        titleValid: '',
+        descriptionValid: '',
+        imageValid: '',
+    };
+    this.styles = {
+        root: {
+            display: 'flex',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+        },
+        postSize:{
+            width: '68%',
+        },
+        input: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            flexWrap: 'wrap',
+        },
+        medium: {
+            width: "70%",
+            height: 40,
+            margin: 12,
+        }
+    };
 
-    }
+}
 
-    dellPost = id => {
-        this.props.dellPost(id)
+    deletePost = id => {
+        this.props. deletePost(id)
     };
 
     timeCreate = time =>{
@@ -63,19 +60,19 @@ class Edit extends Component {
         return createPostDate;
     };
 
-    onTitleChange(e) {
+    onTitleChange = e => {
         this.setState({ title: e.target.value });
-    }
+    };
 
-    onContentChange(e) {
+    onContentChange = e => {
         this.setState({ description: e.target.value });
         return e.target.value = '';
-    }
+    };
 
-    onImagesURLChange(e) {
+    onImagesURLChange = e => {
         this.setState({ image: e.target.value });
         return e.target.value = '';
-    }
+    };
 
     validate = () => {
         let isError = false;
@@ -92,12 +89,11 @@ class Edit extends Component {
             isError = true;
             errors.descriptionValid = "must be at least one letter";
         }
-        if (this.state.image.indexOf("http") === -1) {
+        if (this.state.image.includes("http") === -1) {
             isError = true;
             errors.imageValid = "you must copy the url of your image ";
         }
         this.setState({
-            ...this.state,
             ...errors
         });
         return isError;
@@ -157,7 +153,7 @@ class Edit extends Component {
                         </NavLink>
                         <NavLink to="/posts">
                             <FlatButton label="Dell post"
-                                        onClick={()=> this.dellPost(post.id)}
+                                        onClick={()=> this.deletePost(post.id)}
                             />
                         </NavLink>
                     </CardActions>
@@ -175,7 +171,7 @@ export default withRouter(connect(
         }
     },
     dispatch => bindActionCreators({
-        dellPost,
+        deletePost,
         changePost
     }, dispatch)
 )(Edit));
