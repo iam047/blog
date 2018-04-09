@@ -20,93 +20,17 @@ export default reducerHelper(initialState, {
     }),
     [DELETE_POST] : (state, action) => ({
         ...state, posts: [...state.posts.filter(post =>
-            post.id !== action.id
-        )]
+        post.id !== action.id)]
     }),
     [CHANGE_POST] : (state, action) => ({
-        ...state, posts: [...state.posts.map(post => post.id === action.id
-            ? {...post,
-                title: action.title,
-                description: action.description,
-                image: action.image,
-                createdAt: Date.now()
-            } : post
-        )]
+        ...state, posts: [...state.posts.map(post => post.id === action.id ? {...post,
+        title: action.title, description: action.description, image: action.image,
+        createdAt: Date.now()} : post)]
     }),
     [VALUE_SEARCH] : (state, action) => ({
-            ...state, posts: [...state.posts], searchValue: action.value
+        ...state, posts: [...state.posts], searchValue: action.value
     }),
     [SORT_DATE] : (state) => ({
-        ...state,   posts: [...state.posts.sort(post => {
-                return post.createdAt
-            }
-        )]
+        ...state, posts: [...state.posts.sort( (a, b) => a.createdAt > b.createdAt? a.createdAt: b.createdAt)]
     }),
-
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const reducerPost = (state = initialState, action) => {
-//     switch (action.type) {
-//         case ADD_POST:
-//             return {
-//                 ...state,
-//                 posts: [
-//                     ...state.posts,
-//                     {
-//                         id: Date.now().toString(),
-//                         title: action.title,
-//                         description: action.description,
-//                         image: action.image,
-//                         createdAt: Date.now(),
-//                         updatedAt: '',
-//
-//                     },
-//                 ],
-//             };
-//         case DELL_POST:
-//             return {
-//                 ...state, posts: [...state.posts.filter(post =>
-//                     post.id !== action.id
-//                 )]
-//             };
-//         case CHANGE_POST :
-//             return{
-//                 ...state, posts: [...state.posts.map(post => post.id === action.id
-//                     ? {...post, title: action.title,
-//                         description: action.description,
-//                         image: action.image,
-//                         createdAt: Date.now() } : post)]
-//             };
-//         default:
-//             return state
-//     }
-// };
-//
-// export default reducerPost

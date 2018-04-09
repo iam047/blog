@@ -5,7 +5,7 @@ import {Card, CardActions, CardHeader} from 'material-ui/Card';
 import {List} from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import moment from "moment/moment";
-import {  deletePost, changePost } from '../actions';
+import { dellPost, changePost } from '../actions';
 import { withRouter ,NavLink } from 'react-router-dom';
 import { TextField } from 'material-ui';
 
@@ -50,8 +50,8 @@ constructor(props) {
 
 }
 
-    deletePost = id => {
-        this.props. deletePost(id)
+    dellPost = id => {
+        this.props.dellPost(id)
     };
 
     timeCreate = time =>{
@@ -125,7 +125,7 @@ constructor(props) {
                             onChange={this.onTitleChange}
                             value={this.state.title}
                             errorText={this.state.titleValid}
-                        /><br />
+                        />
                         <TextField
                             style={this.styles.medium}
                             placeholder = {post.description}
@@ -133,14 +133,14 @@ constructor(props) {
                             onChange={this.onContentChange}
                             value={this.state.description}
                             errorText={this.state.descriptionValid}
-                        /><br />
+                        />
                         <TextField
                             style={this.styles.medium}
                             onChange={this.onImagesURLChange}
                             value={this.state.image}
                             placeholder = {post.image}
                             errorText={this.state.imageValid}
-                        /><br />
+                        />
                     </span>
                     <CardActions >
                         <NavLink to="/posts">
@@ -153,7 +153,7 @@ constructor(props) {
                         </NavLink>
                         <NavLink to="/posts">
                             <FlatButton label="Dell post"
-                                        onClick={()=> this.deletePost(post.id)}
+                                        onClick={()=> this.dellPost(post.id)}
                             />
                         </NavLink>
                     </CardActions>
@@ -171,7 +171,7 @@ export default withRouter(connect(
         }
     },
     dispatch => bindActionCreators({
-        deletePost,
+        dellPost,
         changePost
     }, dispatch)
 )(Edit));

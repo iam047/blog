@@ -6,7 +6,7 @@ export const initialState = {
         title: "Post My asd",
         description: "A document is a written, drawn, presented, or memorialized representation of thought.",
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeIdYh8P61DSTlijYR8hD9OGk4JrSpZU99cN3xFKpH_f_bNAOs',
-        createdAt: Date.now(),
+        createdAt: 1523026450783,
         updatedAt: ''
     },
         {
@@ -16,7 +16,7 @@ export const initialState = {
             title: "My",
             description: "A document",
             image: 'http://www.radionetplus.ru/uploads/posts/2013-05/1369460621_panda-26.jpg',
-            createdAt: Date.now(),
+            createdAt: 1523026452900,
             updatedAt: '',
         }
     ],
