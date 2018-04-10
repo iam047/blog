@@ -5,8 +5,6 @@ import { deletePost, valueSearch, sortDate } from "../actions";
 import { Card } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import Chip from 'material-ui/Chip';
-import { grey50 } from 'material-ui/styles/colors';
 import PostHeader from "../containers/PostHeader";
 import { withRouter, NavLink } from 'react-router-dom';
 import { TextField, RaisedButton } from 'material-ui';
@@ -26,8 +24,11 @@ class PostList extends Component {
             buttonDEll: {
                 display: 'flex',
                 position: 'relative',
-                left: '94%',
-                top: -14,
+                left: '98%',
+                top: -11,
+                width: '4%',
+                cursor: 'pointer'
+
             },
             menu: {
                 display: 'flex',
@@ -36,12 +37,13 @@ class PostList extends Component {
             input: {
                 width: 200,
                 height: 60,
-
+                padding: 3,
             },
             sort: {
                 width: 100,
                 height: 30,
-                margin: 25,
+                margin: 28,
+
             },
         };
     }
@@ -72,8 +74,8 @@ class PostList extends Component {
                             onClick={() => this.sortDate()}
                         />
                         <TextField
-                            style={this.styles.input}
                             floatingLabelText="Search post"
+                            style={this.styles.input}
                             onChange={(e) => this.search(e)}
                         />
                     </div>
@@ -85,11 +87,11 @@ class PostList extends Component {
                                    }) => (
                     <List style={this.styles.root} key={id}>
                         <Card style={this.styles.postSize}>
-                            <Chip style={this.styles.buttonDEll}
-                                  onRequestDelete={() => this.deletePost(id)}
-                                  backgroundColor={grey50}
-                            >
-                            </Chip>
+
+                            <img src='http://4udak.com/wp-content/uploads/2011/09/delete.png'
+                                 onClick={() => this.deletePost(id)}
+                                 style={this.styles.buttonDEll}/>
+
                             <NavLink to={`/post/${id}`}>
                                 <PostHeader title={title}
                                             image={image}

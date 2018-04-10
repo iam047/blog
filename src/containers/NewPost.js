@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addPost } from "../actions";
 import { withRouter } from 'react-router-dom';
-import FormPost from './FormPost';
+import FormPost from '../components/FormPost';
 
 class NewPost extends Component {
     constructor() {

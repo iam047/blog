@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Card, CardHeader } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import moment from "moment/moment";
-import { changePost } from '../actions';
+import { changePost } from '../actions/index';
 import { withRouter } from 'react-router-dom';
-import FormPost from "../containers/FormPost";
+import FormPost from "../components/FormPost";
 
 
 const selectPostById = (id, posts) => {

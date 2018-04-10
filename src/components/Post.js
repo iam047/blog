@@ -23,10 +23,7 @@ class Post extends Component {
             },
             postSize: {
                 width: '58%',
-            },
-            buttonDEll: {
-                justifyContent: 'flex-end'
-            },
+            }
         };
     }
 
@@ -61,8 +58,7 @@ class Post extends Component {
                         </NavLink>
                         <NavLink to="/posts">
                             <FlatButton label="Dell post"
-                                        onClick={() => this.deletePost(id)}
-                            />
+                                        onClick={() => this.deletePost(id)}/>
                         </NavLink>
                     </CardActions>
                 </Card>

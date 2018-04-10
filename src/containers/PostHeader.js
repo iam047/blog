@@ -5,8 +5,8 @@ import moment from "moment/moment";
 export default class PostHeader extends Component {
 
     timeCreate = time => {
-        let now = moment(time);
-        let createPostDate = now.format('dddd, MMMM DD YYYY, h:mm:ss');
+        const now = moment(time);
+        const createPostDate = now.format('dddd, MMMM DD YYYY, h:mm:ss');
         return createPostDate;
     };
 

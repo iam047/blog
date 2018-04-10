@@ -5,13 +5,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PostList from './PostList';
 import BlogPreview from './BlogPreview';
 import Post from './Post';
-import EditPost from './EditPost';
+import EditPost from '../containers/EditPost';
 
 export default class App extends Component {
     constructor() {
         super();
         this.styles = {
-            box:{
+            box: {
                 display: 'flex',
                 flexDirection: 'column',
                 minWidth: 900

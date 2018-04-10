@@ -128,4 +128,5 @@ class FormPost extends Component {
         );
     }
 }
-export default withRouter(connect(null,null)(FormPost));
+
+export default withRouter(connect(null, null)(FormPost));
