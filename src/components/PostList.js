@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {  deletePost, valueSearch, sortDate } from "../actions";
-import {Card} from 'material-ui/Card';
-import {List} from 'material-ui/List';
+import { deletePost, valueSearch, sortDate } from "../actions";
+import { Card } from 'material-ui/Card';
+import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import Chip from 'material-ui/Chip';
-import {grey50} from 'material-ui/styles/colors';
+import { grey50 } from 'material-ui/styles/colors';
 import PostHeader from "../containers/PostHeader";
-import { withRouter ,NavLink } from 'react-router-dom';
+import { withRouter, NavLink } from 'react-router-dom';
 import { TextField, RaisedButton } from 'material-ui';
 
 class PostList extends Component {
-    constructor(){
+    constructor() {
         super();
         this.styles = {
             root: {
@@ -20,11 +20,14 @@ class PostList extends Component {
                 justifyContent: 'center',
                 flexWrap: 'wrap',
             },
-            postSize:{
+            postSize: {
                 width: '35%',
             },
             buttonDEll: {
-                justifyContent:'flex-end'
+                display: 'flex',
+                position: 'relative',
+                left: '94%',
+                top: -14,
             },
             menu: {
                 display: 'flex',
@@ -45,71 +48,73 @@ class PostList extends Component {
 
 
     deletePost = id => {
-       this.props.deletePost(id)
-     };
+        this.props.deletePost(id)
+    };
     search = e => {
         this.props.valueSearch(e.target.value);
     };
-    sortDate = () =>{
+    sortDate = () => {
         this.props.sortDate();
     };
 
-     render() {
+    render() {
         const { posts, searchValue } = this.props;
-        const filterSearch = posts.filter(({title}) => {
+        const filterSearch = posts.filter(({ title }) => {
             return title.toLowerCase().includes(searchValue);
         });
         return (
-            <div >
-                <div style={{backgroundColor: "#f2f2f2"}}>
-                <div style={this.styles.menu} >
-                    <RaisedButton
-                        label="sort"
-                        style={this.styles.sort}
-                        onClick={()=> this.sortDate()}
-                    />
-                    <TextField
-                        style={this.styles.input}
-                        floatingLabelText="Search post"
-                        onChange={(e)=> this.search(e)}
-                    />
+            <div>
+                <div>
+                    <div style={this.styles.menu}>
+                        <RaisedButton
+                            label="sort"
+                            style={this.styles.sort}
+                            onClick={() => this.sortDate()}
+                        />
+                        <TextField
+                            style={this.styles.input}
+                            floatingLabelText="Search post"
+                            onChange={(e) => this.search(e)}
+                        />
+                    </div>
                 </div>
-                </div>
-                {filterSearch.map(({user='user',
-                             userAvatar='http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg',
-                             id,createdAt,title,image,description}) => (
-                <List style={this.styles.root}  key={id} >
-                    <Card style={this.styles.postSize} >
-                        <Chip onRequestDelete={() => this. deletePost(id)}
-                              onClick={()=> this. deletePost(id)}
-                              backgroundColor={grey50}
-                              style={this.styles.buttonDEll}>
-                        </Chip>
-                        <NavLink to={`/post/${id}`}>
-                            <PostHeader title={title}
-                                       image={image}
-                                       createdAt={createdAt}
-                                       description={description}
-                                       user={user}
-                                       userAvatar={userAvatar}
-                            />
-                        </NavLink>
-                        <NavLink to={`/post/${id}/edit`}>
-                            <FlatButton label="Edit" />
-                        </NavLink>
-                    </Card>
-                </List>
+                {filterSearch.map(({
+                                       user = 'user',
+                                       userAvatar = 'http://mirpozitiva.ru/uploads/posts/2016-09/1474011210_15.jpg',
+                                       id, createdAt, title, image, description
+                                   }) => (
+                    <List style={this.styles.root} key={id}>
+                        <Card style={this.styles.postSize}>
+                            <Chip style={this.styles.buttonDEll}
+                                  onRequestDelete={() => this.deletePost(id)}
+                                  backgroundColor={grey50}
+                            >
+                            </Chip>
+                            <NavLink to={`/post/${id}`}>
+                                <PostHeader title={title}
+                                            image={image}
+                                            createdAt={createdAt}
+                                            description={description}
+                                            user={user}
+                                            userAvatar={userAvatar}
+                                />
+                            </NavLink>
+                            <NavLink to={`/post/${id}/edit`}>
+                                <FlatButton label="Edit"/>
+                            </NavLink>
+                        </Card>
+                    </List>
                 ))
                 }
             </div>
         );
-     }
+    }
 }
 
 export default withRouter(connect(
-    ({ reducerHelper }) => ({
-        posts :  reducerHelper.posts,
-        searchValue: reducerHelper.searchValue,
+    ({ reducerPost }) => ({
+        posts: reducerPost.posts,
+        searchValue: reducerPost.searchValue,
 
     }),
     dispatch => bindActionCreators({

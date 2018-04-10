@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 export default class BlogPreview extends Component {
-    constructor(){
+    constructor() {
         super();
         this.styles = {
-            blogTEXT: {
+            blogText: {
                 display: 'flex',
                 flexWrap: 'wrap',
                 justifyContent: 'center',
@@ -13,10 +13,11 @@ export default class BlogPreview extends Component {
         }
     }
 
-    render(){
-        return(
-            <div style={this.styles.blogTEXT}>
-               <img src='https://cdn.fishki.net/upload/post/2017/03/19/2245758/tn/02-funny-cat-wallpapercat-wallpaper.jpg' />
+    render() {
+        return (
+            <div style={this.styles.blogText}>
+                <img
+                    src='https://cdn.fishki.net/upload/post/2017/03/19/2245758/tn/02-funny-cat-wallpapercat-wallpaper.jpg'/>
             </div>
         );
     }
