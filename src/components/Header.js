@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter, NavLink } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
-import GitHubLogin from 'react-github-login';
 
 
 export default class Header extends Component {
@@ -36,9 +35,6 @@ export default class Header extends Component {
                     </NavLink>
                     <NavLink to="/posts/new">
                         <RaisedButton label="NewPost" style={this.styles.medium}/>
-                    </NavLink>
-                    <NavLink to="/authentication">
-                        <RaisedButton label="Authentication" style={this.styles.medium}/>
                     </NavLink>
                 </div>
             </div>

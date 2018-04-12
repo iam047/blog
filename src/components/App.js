@@ -6,7 +6,6 @@ import PostList from './PostList';
 import BlogPreview from './BlogPreview';
 import Post from './Post';
 import EditPost from '../containers/EditPost';
-import Authentication from "./Authentication";
 
 export default class App extends Component {
     constructor() {
@@ -32,7 +31,6 @@ export default class App extends Component {
                             <Route path="/posts" component={PostList}/>
                             <Route exact path="/post/:id" component={Post}/>
                             <Route exact path="/post/:id/edit" component={EditPost}/>
-                            <Route exact path="/authentication" component={Authentication}/>
                         </Switch>
                     </div>
                 </Router>

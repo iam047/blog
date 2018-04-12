@@ -5,7 +5,7 @@ import { deletePost, valueSearch, sortDate } from "../actions";
 import { Card } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import PostHeader from "../containers/PostHeader";
+import PostHeader from "./PostHeader";
 import { withRouter, NavLink } from 'react-router-dom';
 import { TextField, RaisedButton } from 'material-ui';
 

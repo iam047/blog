@@ -6,7 +6,7 @@ import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 import { deletePost } from '../actions';
 import { withRouter, NavLink } from 'react-router-dom';
-import PostHeader from "../containers/PostHeader";
+import PostHeader from "./PostHeader";
 
 const selectPostById = (id, posts) => {
     return posts.find(post => post.id === id);
