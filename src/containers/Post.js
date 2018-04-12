@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Card, CardActions } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import { deletePost } from '../actions';
+import { deletePost } from '../actions/index';
 import { withRouter, NavLink } from 'react-router-dom';
-import PostHeader from "./PostHeader";
+import PostHeader from "../components/PostHeader";
 
 const selectPostById = (id, posts) => {
     return posts.find(post => post.id === id);

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Header from './Header';
 import NewPost from "../containers/NewPost";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PostList from './PostList';
+import PostList from '../containers/PostList';
 import BlogPreview from './BlogPreview';
-import Post from './Post';
+import Post from '../containers/Post';
 import EditPost from '../containers/EditPost';
 
 export default class App extends Component {

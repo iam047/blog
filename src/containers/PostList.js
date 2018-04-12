@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deletePost, valueSearch, sortDate } from "../actions";
+import { deletePost, valueSearch, sortDate } from "../actions/index";
 import { Card } from 'material-ui/Card';
 import { List } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
-import PostHeader from "./PostHeader";
+import PostHeader from "../components/PostHeader";
 import { withRouter, NavLink } from 'react-router-dom';
 import { TextField, RaisedButton } from 'material-ui';
 
